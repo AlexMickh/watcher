@@ -14,9 +14,16 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(Protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
 
+add_library(project_deps INTERFACE)
+
+target_link_libraries(project_deps INTERFACE
+    gRPC::grpc++
+    protobuf::libprotobuf
+)
 # Экспортируем пути к плагинам, чтобы использовать в макросах
 set(PROTOC $<TARGET_FILE:protobuf::protoc> CACHE FILEPATH "protoc executable")
 set(GRPC_CPP_PLUGIN $<TARGET_FILE:gRPC::grpc_cpp_plugin> CACHE FILEPATH "gRPC C++ plugin")
+
 
 # Подключаем общий макрос для генерации .proto
 include(proto)

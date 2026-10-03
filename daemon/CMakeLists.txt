@@ -4,4 +4,5 @@ add_executable(daemon
 
 target_link_libraries(daemon PRIVATE
     common
+    project_deps
 )
